@@ -98,5 +98,17 @@ class SList
         Node *first = & Node(ref, NULL);
         this->Last->next(first);
     }
+
+	string const& pop_front()const
+	{
+		string ret = first().stringi():
+		delete(first());
+		return ret;
+	}
+	
+	string const& pop_back const
+	{
+		
+	}
 }
 
