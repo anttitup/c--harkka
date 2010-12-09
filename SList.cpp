@@ -18,97 +18,114 @@
 
 
 #include "SList.h"
-using namespace std;
-class Node
-{
-    Node(string stringi, Node * next)
+
+    Node::Node(std::string stringi, Node* next)
     {
         this->stringi = stringi;
         this->next= next;
         
     }
     
-    ~Node()
+    Node::~Node()
     {
-        delete this->stringi;
+        delete(&stringi);
         this->next = NULL;
-        delete this;
+        delete(this);
     }
 
-    string const& stringi() const  
+    void Node::set_stringi(std::string const& new_string)
     {
-        return stringi;
-    }
+       this->stringi=new_string; 
+    }   
     
-    Node* next()
+    void Node::set_next(Node* next)
+    {
+        this->next=next;
+    }
+ 
+    Node * Node::get_next() 
     {
         return this->next;        
     }
-
-    void next(Node* next)
+    
+    std::string const& Node::get_stringi()const
     {
-        return this->next=next;
+        return stringi;
     }
-}
 
-class SList
-{
-    SList(Node first,Node Last) 
+    //SList
+    //
+    //
+    
+    SList::SList(Node * first,Node * last) 
     {
         this->First=first;
         this->Last=last;
     }
 
-    ~Slist()
+    SList::~SList()
     {
+
     }
 
-    Node* first()
-    {
-        return this->First;
-    }
-    void first(Node *first)
+    void SList::set_first(Node *first)
     {
         this->First = first;
     }
 
-    Node* Last()
-    {
-        return this->Last;
-    }
 
-    void last(Node *last)
+    void SList::set_last(Node *last)
     {
         this->Last=last;
     }
-
-   string const& front() const
+    std::string const& SList::front() const
     {
-        return this->First->stringi();
+        return this->First->get_stringi();
     }
     
-   void push_front(string const& ref)
+    void SList::push_front(std::string const& ref)
     {
-        Node * first= &Node(ref,this->first->next());
-        Slist->First = first;
+       this->First = new Node(ref,this->First->get_next());
     } 
      
-    void push_back(string const& ref)
+    void SList::push_back(std::string const& ref)
     {
-        Node *first = & Node(ref, NULL);
-        this->Last->next(first);
+        Node* first = &Node(ref, NULL);
+        //this->Last->next(first); iterator first
     }
 
-	string const& pop_front()const
+	std::string const& SList::pop_front()const
 	{
-		string ret = first().stringi():
-		delete(first());
+		std::string ret = First->get_stringi();
+	    Node* old_first = get_first();
+        First=old_first->next()
+    	delete(old_first);
 		return ret;
 	}
 	
-	string const& pop_back const
+	std::string const& SList::pop_back const
 	{
-		
+	    string ret = last()->stringi();
+        //iter len-1 Last this;
+        return ret;
 	}
+    
+    void SList::reverse()
+    {
+        
+    }
+
+    void SList::swap()
+    {
+    }
+
+    friend ostream& SList::operator<<(ostream &out, Node &cNode)
+    {
+        // iter
+    }    
+    friend ostream& SList::operator>>(ostream &in, Node cNode)
+    {
+        //do something
+    }
 }
 
