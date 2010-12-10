@@ -22,8 +22,7 @@
     Node::Node(std::string stringi, Node* next)
     {
         this->stringi = stringi;
-        this->next= next;
-        
+        this->next= next;        
     }
     
     Node::~Node()
@@ -68,15 +67,25 @@
 
     }
 
+    Node * SList::get_first()
+    {
+        return First;        
+    }
+
+    Node * SList::get_last()
+    {
+        return Last;
+    }
+
     void SList::set_first(Node *first)
     {
-        this->First = first;
+        First = first;
     }
 
 
     void SList::set_last(Node *last)
     {
-        this->Last=last;
+        Last=last;
     }
     std::string const& SList::front() const
     {
@@ -94,21 +103,23 @@
         //this->Last->next(first); iterator first
     }
 
-	std::string const& SList::pop_front()const
-	{
-		std::string ret = First->get_stringi();
-	    Node* old_first = get_first();
-        First=old_first->next()
-    	delete(old_first);
-		return ret;
-	}
-	
-	std::string const& SList::pop_back const
-	{
-	    string ret = last()->stringi();
+    std::string const& SList::pop_front()const
+    {
+	std::string ret = First->get_stringi();
+        Node new_first = First.get_next;
+    	delete(First);
+        set_first(new_first)
+	return ret;
+    }
+    
+
+    
+    std::string const& SList::pop_back const
+    {
+        string ret = last()->stringi();
         //iter len-1 Last this;
         return ret;
-	}
+    }
     
     void SList::reverse()
     {

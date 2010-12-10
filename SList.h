@@ -26,7 +26,8 @@ class SList
     public:
         SList(Node * first,Node * last);
         ~SList(); 
-        Node const& operator()();
+        Node* get_first();
+        Node* get_last();
         void set_first(Node * first);
         void set_last(Node * last);
         std::string const& front()const;
