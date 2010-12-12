@@ -205,5 +205,12 @@
 		return *this;		
 	}
 
+	const_SList_iterator const& const_SList_iterator::operator++()
+	{
+		p=p->get_next();
+		return *this;		
+	}
+
+		
 		
 

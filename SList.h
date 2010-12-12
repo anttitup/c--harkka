@@ -41,7 +41,8 @@ class SList
 		int len(); 
 };
 
-class SList_iterator:public std::iterator<std::string,Node>
+class SList_iterator:public 
+	std::iterator<std::input_iterator_tag,Node>
 {
     private:
         Node* p;
@@ -54,4 +55,20 @@ class SList_iterator:public std::iterator<std::string,Node>
 		SList_iterator& operator++(int) {SList_iterator tmp(*this); 
 			operator++(); return tmp;}
         Node& operator*(){return *p;}
+};
+
+class const_SList_iterator:public 
+	std::iterator<std::forward_iterator_tag,Node>
+{
+    private:
+        Node* p;
+    public:
+        const_SList_iterator(Node* x):p(x){};
+        const_SList_iterator(const const_SList_iterator& mit): p(mit.p){}
+        const_SList_iterator const& operator++();
+        bool operator==(const_SList_iterator& rhs){return p==rhs.p;}
+        bool operator!=(const_SList_iterator& rhs){return p!=rhs.p;}
+		const_SList_iterator const& operator++(int) {const_SList_iterator tmp(*this); 
+			operator++(); return tmp;}
+        Node const& operator*(){return *p;}
 };
