@@ -56,16 +56,24 @@
     //
     //
     
-    SList::SList(Node * first,Node * last) 
-    {
-        this->First=first;
-        this->Last=last;
+    SList::SList(std::string first,std::string second) 
+    { 
+		First=NULL;
+		Last=NULL;
+		if(first!="")
+			this->First= new Node(first);
+		if(second!="")
+		{
+			this->Last = new Node(second);
+        	this->First->set_next(Last);
+		}
+		else
+			this->Last=First;
+
     }
 
     SList::~SList()
-    {
-		for(First)
-    }
+    { }
 
     Node * SList::get_first() const
     {
@@ -106,18 +114,16 @@
 		    
 	}
 
-    std::string const& SList::pop_front()
+    std::string SList::pop_front()
     {
 		std::string ret = First->get_stringi();
 		Node * new_first = First->get_next();
     	delete(First);
-		set_first(new_first);
+		First=new_first;
 		return ret;
     }
     
-
-    
-    std::string const& SList::pop_back() 
+    std::string SList::pop_back() 
     {
         std::string ret = Last->get_stringi();
         //iter len-1 Last this;
@@ -126,12 +132,20 @@
     
     void SList::reverse()
     {
-       for
     }
 
     void SList::swap(int index,int other_index)
     {
     }
+
+	int SList::len()
+	{
+		int len =0;
+		Node* iter = First;
+		while((iter=iter->get_next())!=NULL)
+			len++;
+		return len;
+	}
 
     std::ostream& operator<<(std::ostream& out, Node& cNode)
     {

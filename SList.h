@@ -24,7 +24,7 @@ class SList
         Node* First;
         Node* Last;
     public:
-        SList(Node * first,Node * last);
+        SList(std::string="",std::string="");
         ~SList(); 
         Node* get_first()const;
         Node* get_last()const;
@@ -33,13 +33,13 @@ class SList
         std::string const& front()const;
         void push_front(std::string const&);
         void push_back(std::string const&);
-        std::string const& pop_front();
-        std::string const& pop_back();
+        std::string  pop_front();
+        std::string pop_back();
         void reverse();
         void swap(int index, int other_index);
        	friend std::ostream& operator<<(std::ostream&, const Node&);
 		friend std::ostream& operator>>(std::ostream&, const Node&);
- 
+		int len(); 
 };
 
 class SList_iterator:public std::iterator<std::string,Node>
@@ -53,5 +53,4 @@ class SList_iterator:public std::iterator<std::string,Node>
         bool operator==(const SList_iterator& rhs){return p==rhs.p;}
         bool operator!=(const SList_iterator& rhs){return p!=rhs.p;}
         Node& operator*(){return *p;}
-		node 
 };
