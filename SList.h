@@ -33,7 +33,7 @@ class SList
         std::string const& front()const;
         void push_front(std::string const&);
         void push_back(std::string const&);
-        std::string  pop_front();
+        std::string const  pop_front();
         std::string pop_back();
         void reverse();
         void swap(int index, int other_index);

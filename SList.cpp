@@ -15,8 +15,6 @@
  *
  * =====================================================================================
  */
-
-
 #include "SList.h"
 
     Node::Node(std::string stringi, Node* next)
@@ -27,9 +25,8 @@
     
     Node::~Node()
     {
-        delete(&stringi);
         this->next = NULL;
-        delete(this);
+		stringi.clear();
     }
 
     void Node::set_stringi(std::string const& new_string)
@@ -73,7 +70,14 @@
     }
 
     SList::~SList()
-    { }
+    { 
+		Node * iter = First;
+		while((iter=iter->get_next())!=NULL)
+			delete iter;
+		delete Last;
+		First=NULL;
+		Last=NULL;
+	}
 
     Node * SList::get_first() const
     {
@@ -103,18 +107,21 @@
     
     void SList::push_front(std::string const& ref)
     {
-       this->First = new Node(ref,this->First->get_next());
-    } 
+		this->First = new Node(ref,this->First->get_next());
+    	if(this->len()<2)
+			Last=this->First->get_next();
+	} 
      
     void SList::push_back(std::string const& ref)
     {
         Node* last = new Node(ref, NULL);
-        Last->set_next(last);
+		if(this->len()<2)
+			First=Last;
+		Last->set_next(last);
 		Last =last;
-		    
 	}
 
-    std::string SList::pop_front()
+    std::string const SList::pop_front()
     {
 		std::string ret = First->get_stringi();
 		Node * new_first = First->get_next();
@@ -123,13 +130,17 @@
 		return ret;
     }
     
-    std::string SList::pop_back() 
+    std::string const SList::pop_back() 
     {
         std::string ret = Last->get_stringi();
         //iter len-1 Last this;
         return ret;
     }
-    
+   	
+	SList_iterator SList::begin()
+	{
+		return
+	} 
     void SList::reverse()
     {
     }
@@ -151,7 +162,8 @@
     {
         // iter
     }    
-    std::ostream& operator>>(std::ostream& in, Node & cNode)
+    
+	std::ostream& operator>>(std::ostream& in, Node & cNode)
     {
         //do something
 	}
@@ -162,6 +174,5 @@
 		return *this;		
 	}
 
-
-
+		
 
