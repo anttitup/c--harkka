@@ -15,7 +15,7 @@ class Node
         Node * get_next();
         //setter
         void set_stringi(std::string const& new_string);
-        void set_next(Node* next);
+        void set_next(Node *);
 };
 
 class SList
@@ -26,30 +26,32 @@ class SList
     public:
         SList(Node * first,Node * last);
         ~SList(); 
-        Node* get_first();
-        Node* get_last();
-        void set_first(Node * first);
-        void set_last(Node * last);
+        Node* get_first()const;
+        Node* get_last()const;
+        void set_first(Node*  first);
+        void set_last(Node* last);
         std::string const& front()const;
         void push_front(std::string const&);
         void push_back(std::string const&);
-        std::string const& pop_front()const;
-        std::string const& pop_back()const;
+        std::string const& pop_front();
+        std::string const& pop_back();
         void reverse();
         void swap(int index, int other_index);
-        friend std::ostream& operator<<(std::ostream &out, Node &cNode);
+       	friend std::ostream& operator<<(std::ostream&, const Node&);
+		friend std::ostream& operator>>(std::ostream&, const Node&);
+ 
 };
 
-class SList_iterator:public std::iterator<std::string,int>
+class SList_iterator:public std::iterator<std::string,Node>
 {
     private:
-        int* p;
+        Node* p;
     public:
-        SList_iterator(int* x):p(x){};
+        SList_iterator(Node* x):p(x){};
         SList_iterator(const SList_iterator& mit): p(mit.p){}
-        SList_iterator& operator++(){++p; return *this;}
-        SList_iterator& operator++(int){SList_iterator tmp(*this); operator++();return tmp;}
+        SList_iterator& operator++();
         bool operator==(const SList_iterator& rhs){return p==rhs.p;}
         bool operator!=(const SList_iterator& rhs){return p!=rhs.p;}
-        int& operator*(){return *p;} 
+        Node& operator*(){return *p;}
+		node 
 };

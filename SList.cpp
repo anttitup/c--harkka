@@ -64,22 +64,22 @@
 
     SList::~SList()
     {
-
+		for(First)
     }
 
-    Node * SList::get_first()
+    Node * SList::get_first() const
     {
         return First;        
     }
 
-    Node * SList::get_last()
+    Node * SList::get_last() const 
     {
         return Last;
     }
 
-    void SList::set_first(Node *first)
+    void SList::set_first(Node * first) 
     {
-        First = first;
+        First=first;
     }
 
 
@@ -87,6 +87,7 @@
     {
         Last=last;
     }
+
     std::string const& SList::front() const
     {
         return this->First->get_stringi();
@@ -99,44 +100,54 @@
      
     void SList::push_back(std::string const& ref)
     {
-        Node* first = &Node(ref, NULL);
-        //this->Last->next(first); iterator first
-    }
+        Node* last = new Node(ref, NULL);
+        Last->set_next(last);
+		Last =last;
+		    
+	}
 
-    std::string const& SList::pop_front()const
+    std::string const& SList::pop_front()
     {
-	std::string ret = First->get_stringi();
-        Node new_first = First.get_next;
+		std::string ret = First->get_stringi();
+		Node * new_first = First->get_next();
     	delete(First);
-        set_first(new_first)
-	return ret;
+		set_first(new_first);
+		return ret;
     }
     
 
     
-    std::string const& SList::pop_back const
+    std::string const& SList::pop_back() 
     {
-        string ret = last()->stringi();
+        std::string ret = Last->get_stringi();
         //iter len-1 Last this;
         return ret;
     }
     
     void SList::reverse()
     {
-        
+       for
     }
 
-    void SList::swap()
+    void SList::swap(int index,int other_index)
     {
     }
 
-    friend ostream& SList::operator<<(ostream &out, Node &cNode)
+    std::ostream& operator<<(std::ostream& out, Node& cNode)
     {
         // iter
     }    
-    friend ostream& SList::operator>>(ostream &in, Node cNode)
+    std::ostream& operator>>(std::ostream& in, Node & cNode)
     {
         //do something
-    }
-}
+	}
+	
+	SList_iterator& SList_iterator::operator++()
+	{
+		p=p->get_next();
+		return *this;		
+	}
+
+
+
 
