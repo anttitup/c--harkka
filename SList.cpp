@@ -34,9 +34,9 @@
        this->stringi=new_string; 
     }   
     
-    void Node::set_next(Node* next)
+    void Node::set_next(Node* next_)
     {
-        this->next=next;
+        this->next=next_;
     }
  
     Node * Node::get_next() 
@@ -137,16 +137,46 @@
         return ret;
     }
    	
-	SList_iterator SList::begin()
-	{
-		return
-	} 
     void SList::reverse()
     {
+		Node * new_head = First; 
+	   	Node * auxiliary_tail = Last;
+		Node * help; 
+		while ( new_head != auxiliary_tail ) 
+	   	{ 
+	   		Node * tmp = new_head ; 
+	   		new_head = new_head->get_next(); 
+			help=auxiliary_tail->get_next();
+	   		tmp->set_next(help); 
+	   		auxiliary_tail->set_next(tmp); 
+		} 
+
+        First=new_head;
+		Last=auxiliary_tail; 
     }
 
     void SList::swap(int index,int other_index)
-    {
+    {	
+		int i=0;
+		int j=0;
+		Node * in;
+		Node * se;
+		while(i!=index)
+		{
+			in=in->get_next();
+			i++;
+		}
+
+		std::string tmp =in->get_stringi();
+		while(j!=other_index)
+		{
+			se=se->get_next();
+			j++;
+		}
+		
+		std::string tmp_ = se->get_stringi();
+		in->set_stringi(tmp_);
+		se->set_stringi(tmp);
     }
 
 	int SList::len()
@@ -158,15 +188,16 @@
 		return len;
 	}
 
-    std::ostream& operator<<(std::ostream& out, Node& cNode)
+    std::ostream& operator<<(std::ostream& out, SList& cSList)
     {
-        // iter
-    }    
+        SList_iterator begin(cSList.get_first());
+		SList_iterator end(cSList.get_last());
+		out<<"ehllo";
+		for(SList_iterator it = begin; it!=end;it++)
+		out<<(*it).get_stringi()<<"\n";
+    	return out;
+	}    
     
-	std::ostream& operator>>(std::ostream& in, Node & cNode)
-    {
-        //do something
-	}
 	
 	SList_iterator& SList_iterator::operator++()
 	{

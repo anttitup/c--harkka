@@ -69,6 +69,7 @@ void test_pop_back(Test* test)
 {
 	std::string s("world");
 	SList* list = new SList("hello","world");
+	std::cout<<*list;
 	std::string act = list->pop_back();
 	test->equals(act,s);
 

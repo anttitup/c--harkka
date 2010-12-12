@@ -34,11 +34,10 @@ class SList
         void push_front(std::string const&);
         void push_back(std::string const&);
         std::string const  pop_front();
-        std::string pop_back();
+        std::string const pop_back();
         void reverse();
         void swap(int index, int other_index);
-       	friend std::ostream& operator<<(std::ostream&, const Node&);
-		friend std::ostream& operator>>(std::ostream&, const Node&);
+       	friend std::ostream& operator<<(std::ostream&, const SList&);
 		int len(); 
 };
 
@@ -52,5 +51,7 @@ class SList_iterator:public std::iterator<std::string,Node>
         SList_iterator& operator++();
         bool operator==(const SList_iterator& rhs){return p==rhs.p;}
         bool operator!=(const SList_iterator& rhs){return p!=rhs.p;}
+		SList_iterator& operator++(int) {SList_iterator tmp(*this); 
+			operator++(); return tmp;}
         Node& operator*(){return *p;}
 };
