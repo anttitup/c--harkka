@@ -72,13 +72,32 @@
     SList::~SList()
     { 
 		Node * iter = First;
-		while((iter=iter->get_next())!=NULL)
+		while(iter!=NULL){
 			delete iter;
-		delete Last;
+			iter = iter->get_next();
+		}
 		First=NULL;
 		Last=NULL;
 	}
 
+	SList::SList(const SList& cp_this)
+	{
+		Node *iter_b,*iter;	
+		for(SList_iterator it=cp_this.begin();
+			it!=cp_this.end();it++)
+		{
+			iter = new Node((*it).get_stringi());
+
+			if(it==cp_this.begin())
+				First =iter;
+
+			iter_b->set_next(iter);
+			iter_b=iter;
+		}
+		
+		Last=iter;
+		iter_b=NULL;
+	}
     Node * SList::get_first() const
     {
         return First;        
@@ -133,71 +152,84 @@
     std::string const SList::pop_back() 
     {
         std::string ret = Last->get_stringi();
-        //iter len-1 Last this;
-        return ret;
+		Node * new_last=First;
+        while((new_last=new_last->get_next())!=Last)
+			;
+		delete Last;
+		Last=new_last;		
+		return ret;
     }
    	
     void SList::reverse()
     {
-		Node * new_head = First; 
-	   	Node * auxiliary_tail = Last;
-		Node * help; 
-		while ( new_head != auxiliary_tail ) 
-	   	{ 
-	   		Node * tmp = new_head ; 
-	   		new_head = new_head->get_next(); 
-			help=auxiliary_tail->get_next();
-	   		tmp->set_next(help); 
-	   		auxiliary_tail->set_next(tmp); 
-		} 
+		Node * new_root=NULL;
+		Node * root = this->First;
+		Node * last= this->First; 
+  		while (root!=NULL) 
+		{
+   			Node* next = root->get_next();
+    		root->set_next(new_root);
+    		new_root = root;
+    		root = next;
+  		} 
 
-        First=new_head;
-		Last=auxiliary_tail; 
-    
-    void SList::swap(int index,int other_index)
+        First=new_root;
+		Last=last; 
+   	}
+ 
+    void SList::swap(SList& other)
     {	
-		int i=0;
-		int j=0;
-		Node * in;
-		Node * se;
-		while(i!=index)
-		{
-			in=in->get_next();
-			i++;
-		}
-
-		std::string tmp =in->get_stringi();
-		while(j!=other_index)
-		{
-			se=se->get_next();
-			j++;
-		}
+		Node *temp,*temp_;
+		temp =this->First;
+		temp_ = this->Last;
 		
-		std::string tmp_ = se->get_stringi();
-		in->set_stringi(tmp_);
-		se->set_stringi(tmp);
+		this->First=other.First;
+		this->Last=other.Last;
+	
+		other.First=temp;
+		other.Last=temp_;	
     }
 
 	int SList::len()
 	{
 		int len =0;
 		Node* iter = First;
-		while((iter=iter->get_next())!=NULL)
+		while(iter!=NULL)
+		{
 			len++;
+			iter=iter->get_next();
+		}
 		return len;
 	}
 
     std::ostream& operator<<(std::ostream& out, const SList& cSList)
     {
-   //     SList_iterator begin(cSList.get_first());
-	//	SList_iterator end(cSList.get_last());
-		out<<"ehllo";
-	//	for(SList_iterator it = begin; it!=end;it++)
-	//	    out<<(*it).get_stringi()<<"\n";
+		out<<"Node:";
+		for(SList_iterator it = cSList.begin(); it!=cSList.end();it++)
+		    out<<(*it).get_stringi()<<" ";
     	return out;
 	}    
-    
+   
+	SList_iterator SList::begin()const
+	{
+		return SList_iterator(First);
+	}
 	
+	SList_iterator SList::end()const
+	{
+		return SList_iterator(Last->get_next());
+	}
+
+	std::istream& operator>>(std::istream& in, SList& cSList)
+	{
+			std::string temp;
+			in>>temp;
+			Node* new_node = new Node(temp);
+			cSList.get_last()->set_next(new_node);
+			cSList.set_last(new_node);
+			return in;
+	}	
+
 	SList_iterator& SList_iterator::operator++()
 	{
 		p=p->get_next();
@@ -209,3 +241,5 @@
 		p=p->get_next();
 		return *this;		
 	}
+
+	

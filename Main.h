@@ -28,3 +28,8 @@ void test_push_front(Test* test);
 void test_push_back(Test* test);
 void test_pop_back(Test* test);
 void test_pop_front(Test* test);
+void test_iter(Test * test);
+void test_reverse(Test * test);
+void test_swap(Test* test);
+void test_input(Test* test);
+void test_cp(Test* test);

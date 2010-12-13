@@ -2,6 +2,7 @@
 #include<string.h>
 #include<fstream>
 #include<iterator>
+class SList_iterator;
 class Node
 {
     private:
@@ -26,8 +27,10 @@ class SList
     public:
         SList(std::string="",std::string="");
         ~SList(); 
-        Node* get_first()const;
+        SList(const SList&);
+		Node* get_first()const;
         Node* get_last()const;
+		
         void set_first(Node*  first);
         void set_last(Node* last);
         std::string const& front()const;
@@ -36,9 +39,13 @@ class SList
         std::string const  pop_front();
         std::string const pop_back();
         void reverse();
-        void swap(int index, int other_index);
-       	friend std::ostream& operator<<(std::ostream&, const SList&);
-		int len(); 
+        void swap(SList&);
+	    friend std::ostream& operator<<(std::ostream&,const SList&);
+		friend std::istream& operator>>(std::istream&,SList&);
+		int len();
+	 
+		SList_iterator begin()const;
+		SList_iterator end()const ;
 };
 
 class SList_iterator:public 
@@ -52,7 +59,7 @@ class SList_iterator:public
         SList_iterator& operator++();
         bool operator==(const SList_iterator& rhs){return p==rhs.p;}
         bool operator!=(const SList_iterator& rhs){return p!=rhs.p;}
-		SList_iterator& operator++(int) {SList_iterator tmp(*this); 
+		SList_iterator operator++(int) {SList_iterator tmp(*this); 
 			operator++(); return tmp;}
         Node& operator*(){return *p;}
 };
@@ -68,7 +75,9 @@ class const_SList_iterator:public
         const_SList_iterator const& operator++();
         bool operator==(const_SList_iterator& rhs){return p==rhs.p;}
         bool operator!=(const_SList_iterator& rhs){return p!=rhs.p;}
-		const_SList_iterator const& operator++(int) {const_SList_iterator tmp(*this); 
+		const_SList_iterator const operator++(int) {const_SList_iterator tmp(*this); 
 			operator++(); return tmp;}
-        Node const& operator*(){return *p;}
+        Node const operator*(){return *p;}
 };
+
+
