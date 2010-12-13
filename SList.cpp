@@ -153,8 +153,7 @@
 
         First=new_head;
 		Last=auxiliary_tail; 
-    }
-
+    
     void SList::swap(int index,int other_index)
     {	
 		int i=0;
@@ -188,13 +187,13 @@
 		return len;
 	}
 
-    std::ostream& operator<<(std::ostream& out, SList& cSList)
+    std::ostream& operator<<(std::ostream& out, const SList& cSList)
     {
-        SList_iterator begin(cSList.get_first());
-		SList_iterator end(cSList.get_last());
+   //     SList_iterator begin(cSList.get_first());
+	//	SList_iterator end(cSList.get_last());
 		out<<"ehllo";
-		for(SList_iterator it = begin; it!=end;it++)
-		out<<(*it).get_stringi()<<"\n";
+	//	for(SList_iterator it = begin; it!=end;it++)
+	//	    out<<(*it).get_stringi()<<"\n";
     	return out;
 	}    
     
@@ -210,7 +209,3 @@
 		p=p->get_next();
 		return *this;		
 	}
-
-		
-		
-

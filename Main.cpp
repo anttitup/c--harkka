@@ -71,7 +71,5 @@ void test_pop_back(Test* test)
 	SList* list = new SList("hello","world");
 	std::cout<<*list;
 	std::string act = list->pop_back();
-	test->equals(act,s);
-
-		
+	test->equals(act,s);		
 }
