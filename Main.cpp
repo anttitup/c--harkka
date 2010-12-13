@@ -14,6 +14,7 @@ int main()
 	test_reverse(test);
 	test_swap(test);
 	test_input(test);	
+	test_cp(test);
 }
 
 void test_creating_empty_list(Test * test)
@@ -129,5 +130,7 @@ void test_cp(Test* test)
 {
 	SList *list = new SList("hello","world");
 	SList *list_ = new SList((*list));
-	std::cout<<(*listi_)<<std::endl;
+	std::cout<<(*list_)<<std::endl;
+	delete list;
+	delete list_;
 } 

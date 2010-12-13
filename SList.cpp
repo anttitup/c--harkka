@@ -89,8 +89,10 @@
 			iter = new Node((*it).get_stringi());
 
 			if(it==cp_this.begin())
+			{
 				First =iter;
-
+				iter_b = iter;
+			}
 			iter_b->set_next(iter);
 			iter_b=iter;
 		}
