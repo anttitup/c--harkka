@@ -222,6 +222,16 @@
 		return SList_iterator(Last->get_next());
 	}
 
+	const_SList_iterator SList::const_begin()const
+	{
+		return const_SList_iterator(First);
+	}
+	
+	const_SList_iterator SList::const_end()const
+	{
+		return const_SList_iterator(Last->get_next());
+	}
+
 	std::istream& operator>>(std::istream& in, SList& cSList)
 	{
 			std::string temp;

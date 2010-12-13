@@ -3,6 +3,7 @@
 #include<fstream>
 #include<iterator>
 class SList_iterator;
+class const_SList_iterator;
 class Node
 {
     private:
@@ -46,6 +47,8 @@ class SList
 	 
 		SList_iterator begin()const;
 		SList_iterator end()const ;
+		const_SList_iterator const_begin()const;
+		const_SList_iterator const_end()const ;
 };
 
 class SList_iterator:public 
@@ -73,8 +76,8 @@ class const_SList_iterator:public
         const_SList_iterator(Node* x):p(x){};
         const_SList_iterator(const const_SList_iterator& mit): p(mit.p){}
         const_SList_iterator const& operator++();
-        bool operator==(const_SList_iterator& rhs){return p==rhs.p;}
-        bool operator!=(const_SList_iterator& rhs){return p!=rhs.p;}
+        bool operator==(const const_SList_iterator& rhs){return p==rhs.p;}
+        bool operator!=(const const_SList_iterator& rhs){return p!=rhs.p;}
 		const_SList_iterator const operator++(int) {const_SList_iterator tmp(*this); 
 			operator++(); return tmp;}
         Node const operator*(){return *p;}

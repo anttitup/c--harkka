@@ -15,6 +15,7 @@ int main()
 	test_swap(test);
 	test_input(test);	
 	test_cp(test);
+	test_const_iter(test);
 }
 
 void test_creating_empty_list(Test * test)
@@ -91,8 +92,8 @@ void test_iter(Test* test)
 	SList* list = new SList("hello","wordl");
 	list->push_back("hi");
 	list->push_back("why");
-//	for(SList_iterator it = list->begin();it!=list->end();it++)
-//		std::cout<<(*it).get_stringi()<<endl;
+	for(SList_iterator it = list->begin();it!=list->end();it++)
+		std::cout<<(*it).get_stringi()<<endl;
 	delete list;
 }
 
@@ -133,4 +134,16 @@ void test_cp(Test* test)
 	std::cout<<(*list_)<<std::endl;
 	delete list;
 	delete list_;
-} 
+}
+
+void test_const_iter(Test* test)
+{
+	SList* list = new SList("hello","wordl");
+	list->push_back("hi");
+	list->push_back("why");
+	for(const_SList_iterator it = list->const_begin();it!=list->const_end();it++)
+		std::cout<<(*it).get_stringi()<<endl;
+	delete list;
+}
+
+

@@ -33,3 +33,4 @@ void test_reverse(Test * test);
 void test_swap(Test* test);
 void test_input(Test* test);
 void test_cp(Test* test);
+void test_const_iter(Test* test);

@@ -1,6 +1,6 @@
 
 
-main : Main.o SList.o Test.o
+main : main.o SList.o Test.o
 	g++ Main.o SList.o Test.o -o main
 
 Main.o : Main.h Main.cpp 
